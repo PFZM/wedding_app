@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const { format } = require("date-fns");
-const answerSchema = require("./Answer");
 
 const messageSchema = new Schema({
   messageText: {
@@ -9,16 +8,22 @@ const messageSchema = new Schema({
     minlength: 1,
     maxlength: 280,
   },
+  status: {
+    // only two possible values: Done & Pending
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
     get: (value) => format(value, "do MMM yyyy hh:mm b"),
   },
-  username: {
-    type: String,
-    required: true,
-  },
-  answer: [answerSchema],
+  answers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Answer",
+    },
+  ],
 });
 
 const Message = model("Message", messageSchema);

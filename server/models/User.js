@@ -2,12 +2,6 @@ const { Schema, model } = require("mongoose");
 const { isEmail } = require("validator");
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-  },
   name: {
     type: String,
     unique: true,
@@ -51,7 +45,7 @@ const userSchema = new Schema({
   namePlusOne: {
     type: String,
   },
-  messsage: [
+  messsages: [
     {
       type: Schema.Types.ObjectId,
       ref: "Message",

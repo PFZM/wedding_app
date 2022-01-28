@@ -1,45 +1,73 @@
 const { gql } = require("apollo-server-express");
 
-const typeDefs = ggl`
-type User {
-_id: ID
-username: String
-name: String
-lastname: String
-email: String
-password: String
-phone: String
-admin: Boolean
-attending: Boolean
-plusOne: Boolean
-namePlusOne: Boolean
-message: [String]    
-}
+const typeDefs = gql`
+  type User {
+    _id: ID
+    name: String
+    lastname: String
+    email: String
+    phone: String
+    admin: Boolean
+    attending: Boolean
+    plusOne: Boolean
+    namePlusOne: String
+    messages: [Message]
+  }
 
-type Auth {
+  type Auth {
     token: ID!
     user: User
-}
+  }
 
-type Message {
-_id: ID    
-messageText: String
-createdAt: Date
-username: String
-answer: [String]    
-}
+  type Message {
+    _id: ID
+    messageText: String
+    createdAt: Date
+    answers: [Answer]
+  }
 
-type Query{
-user: User
-messages: [Message]
-}
+  type Answer {
+    _id: ID
+    answerId: String
+    answerBody: String
+    userId: String
+    createdAt: Date
+  }
 
-type Mutation {
+  type Query {
+    users: [User]
+    user(_id: ID): User
+    me: User
+    messages: [Message]
+  }
+
+  type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, name: String!, lastname: String!, email: String!, phone: String!, admin: Boolean!, attending: Boolean!, plusOne: Boolean!, namePlusOne: String): User
-    removeUser: User
-    addMessage(messagge: String)
-}
+    signUp(email: String!, password: String!): Auth
+    addUser(
+      name: String!
+      lastname: String!
+      email: String!
+      phone: String!
+      admin: Boolean!
+      attending: Boolean!
+      plusOne: Boolean!
+      namePlusOne: String
+    ): User
+    editUser(
+      name: String!
+      lastname: String!
+      email: String!
+      phone: String!
+      admin: Boolean!
+      attending: Boolean!
+      plusOne: Boolean!
+      namePlusOne: String
+    ): User
+    addMessage(messaggeText: String!): Message
+    editMessage(messageText: String): Message
+    addAnswer(answerBody: String!, messageId: ID, answerId: ID): Answer
+  }
 `;
 
 module.exports = typeDefs;

@@ -1,33 +1,27 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const { format } = require("date-fns");
 
-const answerSchema = new Schema(
-  {
-    answerID: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    answerBody: {
-      type: String,
-      required: true,
-      maxlength: 280,
-    },
-    username: {
-      type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      get: (value) => format(value, "do MMM yyyy hh:mm b"),
-    },
+const answerSchema = new Schema({
+  answerId: {
+    type: Schema.Types.ObjectId,
+    default: null,
   },
-  {
-    toJSON: {
-      getters: true,
-    },
-    id: false,
-  }
-);
+  answerBody: {
+    type: String,
+    required: true,
+    maxlength: 280,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (value) => format(value, "do MMM yyyy hh:mm b"),
+  },
+});
 
-module.exports = answerSchema;
+const Answer = model("Answer", answerSchema);
+
+module.exports = Answer;
