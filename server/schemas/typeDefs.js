@@ -22,7 +22,7 @@ const typeDefs = gql`
   type Message {
     _id: ID
     messageText: String
-    createdAt: Date
+    createdAt: String
     answers: [Answer]
   }
 
@@ -31,7 +31,7 @@ const typeDefs = gql`
     answerId: String
     answerBody: String
     userId: String
-    createdAt: Date
+    createdAt: String
   }
 
   type Query {
@@ -50,7 +50,7 @@ const typeDefs = gql`
       email: String!
       phone: String!
       admin: Boolean!
-      attending: Boolean!
+      attending: Boolean
       plusOne: Boolean!
       namePlusOne: String
     ): User
@@ -60,10 +60,11 @@ const typeDefs = gql`
       email: String!
       phone: String!
       admin: Boolean!
-      attending: Boolean!
+      attending: Boolean
       plusOne: Boolean!
       namePlusOne: String
     ): User
+    attendingWedding(attending: Boolean!): User
     addMessage(messaggeText: String!): Message
     editMessage(messageText: String): Message
     addAnswer(answerBody: String!, messageId: ID, answerId: ID): Answer

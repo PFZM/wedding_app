@@ -4,7 +4,7 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async ({}) => {
+    users: async () => {
       return User.find().populate("messages");
     },
     user: async (_, { _id }) => {
@@ -16,8 +16,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    messages: async ({}) => {
-      return Message.find({}).sort({ createdAt: -1 });
+    messages: async () => {
+      return Message.find().sort({ createdAt: -1 });
     },
   },
 
@@ -57,10 +57,45 @@ const resolvers = {
       }
     },
 
-    addUser: async (_, userDetails) => {
+    addUser: async (_, userDetails, context) => {
       try {
-        const user = await User.create(userDetails);
-        return { user };
+        if (context.user.admin) {
+          const user = await User.create(userDetails);
+          return { user };
+        }
+        throw new AuthenticationError("You are not auth to add users");
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    attendingWedding: async (_, { rsvp }, context) => {
+      try {
+        if (context.user) {
+          const attendingWed = await User.findOneAndUpdate(
+            { _id: context.user.id },
+            { $addToSet: { attending: rsvp } },
+            { new: true }
+          );
+          return attendingWed;
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    editUser: async (_, { _id, ...userDetails }, context) => {
+      try {
+        if (context.user.admin) {
+          const user = await User.findOneAndUpade(
+            { _id: _id },
+            { ...userDetails },
+            { new: true }
+          );
+          return { user };
+        }
+        throw new AuthenticationError("You are not auth to edit users");
       } catch (err) {
         console.error(err);
       }
@@ -76,7 +111,8 @@ const resolvers = {
 
           await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { messages: newMessage._id } }
+            { $addToSet: { messages: newMessage._id } },
+            { new: true }
           );
 
           return newMessage;
@@ -98,7 +134,8 @@ const resolvers = {
 
           await Message.findOneAndUpdate(
             { _id: messageId },
-            { $push: answerMessage }
+            { $push: answerMessage },
+            { new: true }
           );
 
           return answerMessage;
