@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Test Admin1",
+    "lastname": "Admin1",
+    "email": "admin1@test.com",
+    "password": "password01",
+    "phone": "614000555",
+    "admin": "true",
+    "attending": true,
+    "plusOne": false
+  },
+  {
+    "name": "Test1",
+    "lastname": "Guest1",
+    "email": "guest1@test.com",
+    "phone": "615456789",
+    "admin": false,
+    "attending": true,
+    "plusOne": true,
+    "namePlusOne": "guest1+1"
+  },
+  {
+    "name": "Test2",
+    "lastname": "Guest2",
+    "email": "guest2@test.com",
+    "phone": "615456789",
+    "admin": false,
+    "attending": true,
+    "plusOne": false
+  }
+]
