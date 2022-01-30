@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,8 +8,11 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { Header, Footer } from "./layouts";
-import { Home, Login, Signup } from "./pages";
+import Header from "./layouts/header";
+import Footer from "./layouts/footer";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -30,20 +33,20 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-useEffect(() => {
-  document.title = "Lana & Pablo Wedding";
-}, []);
-
 function App() {
+  useEffect(() => {
+    document.title = "Lana & Pablo Wedding";
+  }, []);
+
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <div>
           <Header />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/me" component={Home} />
           </Switch>
           <Footer />
         </div>

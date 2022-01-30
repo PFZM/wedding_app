@@ -50,6 +50,10 @@ const resolvers = {
           { $addToSet: { password: { password } } },
           { new: true }
         );
+
+        if (!signUpUser) {
+          throw new AuthenticationError("No user found with this email");
+        }
         const token = signToken(signUpUser);
         return { token, signUpUser };
       } catch (err) {
