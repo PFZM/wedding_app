@@ -45,17 +45,18 @@ const resolvers = {
 
     signUp: async (_, { email, password }) => {
       try {
-        const signUpUser = await User.findOneAndUpdate(
-          { email: email },
-          { $addToSet: { password: { password } } },
+        const user = await User.findOneAndUpdate(
+          { email },
+          { password },
           { new: true }
         );
+        console.log(user);
 
-        if (!signUpUser) {
+        if (!user) {
           throw new AuthenticationError("No user found with this email");
         }
-        const token = signToken(signUpUser);
-        return { token, signUpUser };
+        const token = signToken(user);
+        return { token, user };
       } catch (err) {
         console.error(err);
       }
