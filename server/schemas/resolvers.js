@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Message, Answer } = require("../models");
+const bcrypt = require("bcrypt");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -29,7 +30,10 @@ const resolvers = {
           throw new AuthenticationError("No user found with these details");
         }
 
+        console.log("password", password);
         const correctPw = await user.isCorrectPassword(password);
+
+        console.log("correctPw", correctPw);
 
         if (!correctPw) {
           throw new AuthenticationError("Incorrect credentials");
@@ -45,9 +49,11 @@ const resolvers = {
 
     signUp: async (_, { email, password }) => {
       try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const user = await User.findOneAndUpdate(
           { email },
-          { password },
+          { password: hashedPassword },
           { new: true }
         );
         console.log(user);
