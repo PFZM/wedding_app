@@ -50,10 +50,12 @@ function Nav() {
                 </Link>
               )}
             </div>
-            <span className="text-black px-5 py-2">Hello Pablo!</span>
+            <div className="flex items-center justify-items-end  md:flex">
+              <span className=" text-black px-5 py-2">Hello Pablo!</span>
+            </div>
             <div className="w-auto hidden md:flex">
               <button
-                className="bg-gray-700 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                className="bg-gray-700 text-white hover:bg-rose-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 onClick={logout}
               >
                 Logout
@@ -103,7 +105,6 @@ function Nav() {
                 </svg>
               )}
             </button>
-            {/* </div> */}
           </div>
         </div>
 
@@ -118,10 +119,11 @@ function Nav() {
         >
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3  " >
+                <div className="divide-y-2 divide-dashed">
                 <Link
                   to="/"
-                  className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="border-solid text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Home
                 </Link>
@@ -147,15 +149,13 @@ function Nav() {
                     Guests-Dashboard
                   </Link>
                 )}
-                <div className="w-auto hidden md:flex">
+                </div>
                   <button
-                    className="bg-gray-700 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="bg-gray-700 text-white hover:bg-rose-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium w-full"
                     onClick={logout}
                   >
                     Logout
                   </button>
-                  {/* </div> */}
-                </div>
               </div>
             </div>
           )}
