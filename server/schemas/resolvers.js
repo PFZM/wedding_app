@@ -12,6 +12,7 @@ const resolvers = {
       return User.findOne({ _id }).populate("messages");
     },
     me: async (_, __, context) => {
+      console.log(context);
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("messages");
       }
@@ -32,8 +33,6 @@ const resolvers = {
 
         console.log("password", password);
         const correctPw = await user.isCorrectPassword(password);
-
-        console.log("correctPw", correctPw);
 
         if (!correctPw) {
           throw new AuthenticationError("Incorrect credentials");
@@ -56,7 +55,6 @@ const resolvers = {
           { password: hashedPassword },
           { new: true }
         );
-        console.log(user);
 
         if (!user) {
           throw new AuthenticationError("No user found with this email");

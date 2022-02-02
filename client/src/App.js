@@ -8,8 +8,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// import Header from "./components/Header";
-// import Footer from "./components/Footer";
+import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -42,11 +41,18 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          {/* <Header /> */}
           <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <Layout>
+                  <Home />
+                </Layout>
+              )}
+            />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/" component={Home} />
           </Switch>
           {/* <Footer /> */}
         </>
