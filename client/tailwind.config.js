@@ -8,6 +8,7 @@ module.exports = {
       backgroundImage: {
         "login-signup-bkg": "url('./assets/images/cartagena_bkg.jpg')",
         "home-bkg": "url('./assets/images/cartagena_bkg1.jpg')",
+        "landing-bkg": "url('./assets/images/landing_page.jpg')",
       },
       colors: {
         pergamino: "#e6d7bd",
