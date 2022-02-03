@@ -12,11 +12,14 @@ const resolvers = {
       return User.findOne({ _id }).populate("messages");
     },
     me: async (_, __, context) => {
-      console.log(context);
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("messages");
+      try {
+        if (context.user) {
+          return User.findOne({ _id: context.user._id }).populate("messages");
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      } catch (err) {
+        console.error("error", err);
       }
-      throw new AuthenticationError("You need to be logged in!");
     },
     messages: async () => {
       return Message.find().sort({ createdAt: -1 });

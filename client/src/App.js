@@ -7,6 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Auth from "./utils/auth";
 
 import { Layout } from "./components/Layout";
 import LandingPage from "./pages/LandingPage";
@@ -37,6 +38,17 @@ function App() {
   useEffect(() => {
     document.title = "Lana & Pablo Wedding";
   }, []);
+
+  // useEffect(() => {
+  //   const isLoggedIn = async () => {
+  //     const userLogged = await Auth.loggedIn();
+  //     if (userLogged) {
+  //       window.location.assign("/home");
+  //     }
+  //     return;
+  //   };
+  //   isLoggedIn();
+  // }, []);
 
   return (
     <ApolloProvider client={client}>
