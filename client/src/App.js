@@ -7,13 +7,13 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Auth from "./utils/auth";
 
 import { Layout } from "./components/Layout";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Rsvp from "./pages/Rsvp";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -39,17 +39,6 @@ function App() {
     document.title = "Lana & Pablo Wedding";
   }, []);
 
-  // useEffect(() => {
-  //   const isLoggedIn = async () => {
-  //     const userLogged = await Auth.loggedIn();
-  //     if (userLogged) {
-  //       window.location.assign("/home");
-  //     }
-  //     return;
-  //   };
-  //   isLoggedIn();
-  // }, []);
-
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -62,6 +51,15 @@ function App() {
               component={() => (
                 <Layout>
                   <Home />
+                </Layout>
+              )}
+            />
+            <Route
+              exact
+              path="/rsvp/user/:ID"
+              component={() => (
+                <Layout>
+                  <Rsvp />
                 </Layout>
               )}
             />

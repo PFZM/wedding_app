@@ -18,7 +18,7 @@ const resolvers = {
         }
         throw new AuthenticationError("You need to be logged in!");
       } catch (err) {
-        console.error("error", err);
+        console.error(err);
       }
     },
     messages: async () => {
@@ -34,7 +34,6 @@ const resolvers = {
           throw new AuthenticationError("No user found with these details");
         }
 
-        console.log("password", password);
         const correctPw = await user.isCorrectPassword(password);
 
         if (!correctPw) {
@@ -81,12 +80,13 @@ const resolvers = {
       }
     },
 
-    attendingWedding: async (_, { rsvp }, context) => {
+    attendingWedding: async (_, attending, context) => {
       try {
+        console.log("hola");
         if (context.user) {
           const attendingWed = await User.findOneAndUpdate(
             { _id: context.user.id },
-            { $addToSet: { attending: rsvp } },
+            { attending },
             { new: true }
           );
           return attendingWed;

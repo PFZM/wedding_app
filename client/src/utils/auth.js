@@ -19,6 +19,16 @@ class AuthService {
     return false;
   }
 
+  getDataToken() {
+    const dataToken = this.getToken();
+    if (!this.isTokenExpired(dataToken)) {
+      const decoded = decode(dataToken);
+      return decoded.data;
+    } else {
+      return false;
+    }
+  }
+
   getToken() {
     return localStorage.getItem("id_token");
   }

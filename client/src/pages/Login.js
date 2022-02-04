@@ -6,15 +6,20 @@ import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 const Login = () => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [formState, setFormState] = useState({
+    values: { email: "", password: "" },
+    errors: { error: "" },
+  });
+
   const [login, { error }] = useMutation(LOGIN_USER);
+  console.log(error, "error");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log(name, value);
 
     setFormState({
-      ...formState,
-      [name]: value,
+      values: { ...formState.values, [name]: value },
     });
   };
 
@@ -22,18 +27,25 @@ const Login = () => {
     event.preventDefault();
     console.log(formState);
     try {
-      const { data, errors } = await login({
-        variables: { ...formState },
+      const { data } = await login({
+        variables: { ...formState.values },
       });
-      console.log(data, errors);
+      console.log(data.login);
+      if (data.login === null) {
+        setFormState({
+          values: { email: "", password: "" },
+          errors: { error: "Incorrect credentials" },
+        });
+        return;
+      }
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }
 
     setFormState({
-      email: "",
-      password: "",
+      values: { email: "", password: "" },
+      errors: { error: "" },
     });
   };
 
@@ -54,7 +66,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              value={formState.email}
+              value={formState?.values?.email}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder=".......@email.com"
               required
@@ -71,7 +83,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
-              value={formState.password}
+              value={formState?.values?.password}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
@@ -95,11 +107,9 @@ const Login = () => {
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up
             </Link>
+            {formState.errors && <div>{formState.errors.error}</div>}
           </div>
         </form>
-        {error && (
-          <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-        )}
       </div>
     </div>
   );

@@ -23,3 +23,12 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+export const ATTEND_WEDDING = gql`
+  mutation attendingWedding($attending: Boolean!) {
+    attendingWedding(attending: $attending) {
+      _id
+      attending
+    }
+  }
+`;

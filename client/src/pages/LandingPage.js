@@ -1,23 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_ME } from "../utils/queries";
 import Auth from "./../utils/auth";
 
 function LandingPage() {
-  // const { loading, data } = useQuery(QUERY_ME);
-  // const user = data;
-  // console.log(user);
-
   if (Auth.loggedIn()) {
     window.location.assign("/home");
   }
 
   return (
     <main>
-      {/* {loading ? (
-        <div>Loading...</div>
-      ) : ( */}
       <div className="bg-cover bg-landing-bkg max-w-none mx-auto  flex h-screen justify-center items-center">
         <div className="bg-pearl-white shadow border border-gray-200 rounded-lg max-w-sm p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto pt-6 pb-4 px-4 sm:px-6 lg:px-8">

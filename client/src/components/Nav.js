@@ -7,12 +7,12 @@ import { QUERY_ME } from "../utils/queries";
 import Loading from "./Loading";
 
 function Nav() {
+  if (!Auth.loggedIn()) {
+    window.location.assign("/");
+  }
+
   const { loading, data } = useQuery(QUERY_ME);
   console.log(data);
-  // const {
-  //   me: { admin },
-  // } = data;
-  // console.log(admin);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +26,7 @@ function Nav() {
         <Loading />
       ) : (
         <nav className="bg-pergamino">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center max-w-6xl w-full h-16">
               <div className="hidden md:flex grow items-baseline space-x-4">
                 <Link
@@ -37,7 +37,7 @@ function Nav() {
                 </Link>
 
                 <Link
-                  to="/home"
+                  to={{ pathname: `/rsvp/user/${data.me._id}` }}
                   className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   R.S.V.P
@@ -59,7 +59,9 @@ function Nav() {
                 )}
               </div>
               <div className="flex items-center justify-items-end  md:flex">
-                <span className=" text-black px-5 py-2">Hello Pablo!</span>
+                <span className=" text-black px-5 py-2">
+                  Hello {data.me.name}!
+                </span>
               </div>
               <div className="w-auto hidden md:flex">
                 <button
