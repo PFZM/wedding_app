@@ -59,7 +59,7 @@ function Nav() {
                 )}
               </div>
               <div className="flex items-center justify-items-end  md:flex">
-                <span className=" text-black px-5 py-2">
+                <span className=" text-black px-2 py-2 text-lg font-medium lg:text-sm lg:px-5">
                   Hello {data.me.name}!
                 </span>
               </div>
@@ -76,7 +76,7 @@ function Nav() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                className="bg-gray-900 inline-flex items-center justify-center p-4 my-2 mx-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -139,7 +139,7 @@ function Nav() {
                     </Link>
 
                     <Link
-                      to="/home"
+                      to={{ pathname: `/rsvp/user/${data.me._id}` }}
                       className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       R.S.V.P
@@ -151,14 +151,14 @@ function Nav() {
                     >
                       Messages
                     </Link>
-                    {/* {admin && (
+                    {data.me.admin && (
                       <Link
                         to="/home"
                         className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Guests-Dashboard
                       </Link>
-                    )} */}
+                    )}
                   </div>
                   <button
                     className="bg-gray-700 text-white hover:bg-rose-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium w-full"
