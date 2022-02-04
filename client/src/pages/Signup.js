@@ -5,15 +5,9 @@ import { SIGNUP_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 const Signup = () => {
-  //   const [formState, setFormState] = useState({values: {
-  //     email: "",
-  //     password: "",
-  //     passwordConfirmation: "",
-  //   }, errors: {}});
   const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    passwordConfirmation: "",
+    values: { email: "", password: "", passwordConfirmation: "" },
+    errors: { error: "" },
   });
 
   const [signUpUser, { error }] = useMutation(SIGNUP_USER);
@@ -22,8 +16,7 @@ const Signup = () => {
     const { name, value } = event.target;
 
     setFormState({
-      ...formState,
-      [name]: value,
+      values: { ...formState.values, [name]: value },
     });
   };
 
@@ -31,23 +24,40 @@ const Signup = () => {
     event.preventDefault();
 
     try {
-      //   if (formState.password !== formState.passwordConfirmation) {
-      //     console.log(formState.password);
-      //     throw new error("Passwords needs to match");
-      //   }
-
+      if (formState.values.password !== formState.values.passwordConfirmation) {
+        setFormState({
+          values: { email: "", password: "", passwordConfirmation: "" },
+          errors: {
+            error: "Passwords doesn't match!",
+          },
+        });
+        return;
+      }
       const { data } = await signUpUser({
-        variables: { email: formState.email, password: formState.password },
+        variables: {
+          email: formState.values.email,
+          password: formState.values.password,
+        },
       });
+      console.log(data.signUp);
+      if (data.signUp === null) {
+        setFormState({
+          values: { email: "", password: "", passwordConfirmation: "" },
+          errors: {
+            error:
+              "Incorrect credentials, please make sure you are using the email from where you receive the link for the website.",
+          },
+        });
+        return;
+      }
       Auth.login(data.signUp.token);
     } catch (e) {
       console.error(e);
     }
 
     setFormState({
-      email: "",
-      password: "",
-      passwordConfirmation: "",
+      values: { email: "", password: "", passwordConfirmation: "" },
+      errors: { error: "" },
     });
   };
 
@@ -69,7 +79,7 @@ const Signup = () => {
             <input
               type="email"
               name="email"
-              value={formState.email}
+              value={formState?.values?.email}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder=".......@email.com"
               required
@@ -86,7 +96,7 @@ const Signup = () => {
             <input
               type="password"
               name="password"
-              value={formState.password}
+              value={formState?.values?.password}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
@@ -103,7 +113,7 @@ const Signup = () => {
             <input
               type="password"
               name="passwordConfirmation"
-              value={formState.passwordConfirmation}
+              value={formState?.values?.passwordConfirmation}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
@@ -116,8 +126,13 @@ const Signup = () => {
           >
             Sign up!
           </button>
+          {formState.errors && (
+            <div className="border border-red-900 font-bold text-red-900 sm:text-sm rounded-lg  block w-full p-2.5">
+              <span className="text-xl">⚠</span>
+              {formState.errors.error} <span className="text-xl">⚠</span>
+            </div>
+          )}
         </form>
-        {error && <div>{error.message}</div>}
       </div>
     </div>
   );

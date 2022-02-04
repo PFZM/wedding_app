@@ -12,11 +12,9 @@ const Login = () => {
   });
 
   const [login, { error }] = useMutation(LOGIN_USER);
-  console.log(error, "error");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
 
     setFormState({
       values: { ...formState.values, [name]: value },
@@ -25,7 +23,6 @@ const Login = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState.values },
@@ -107,7 +104,12 @@ const Login = () => {
             <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up
             </Link>
-            {formState.errors && <div>{formState.errors.error}</div>}
+            {formState.errors && (
+              <div className="border border-red-900 font-bold text-red-900 sm:text-sm rounded-lg  block w-full p-2.5">
+                <span className="text-xl">⚠</span>
+                {formState.errors.error} <span className="text-xl">⚠</span>
+              </div>
+            )}
           </div>
         </form>
       </div>
