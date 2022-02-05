@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { SIGNUP_USER } from "../utils/mutations";
 
@@ -33,6 +34,15 @@ const Signup = () => {
         });
         return;
       }
+      if (formState.values.password.length < 5) {
+        setFormState({
+          values: { email: "", password: "", passwordConfirmation: "" },
+          errors: {
+            error: "Password needs to be at least 5 characters long!",
+          },
+        });
+        return;
+      }
       const { data } = await signUpUser({
         variables: {
           email: formState.values.email,
@@ -45,7 +55,7 @@ const Signup = () => {
           values: { email: "", password: "", passwordConfirmation: "" },
           errors: {
             error:
-              "Incorrect credentials, please make sure you are using the email from where you receive the link for the website.",
+              "Incorrect credentials, please make sure you are using the email from where you receive the link for the website. If you are already an user please login.",
           },
         });
         return;
@@ -126,12 +136,18 @@ const Signup = () => {
           >
             Sign up!
           </button>
-          {formState.errors?.error && (
-            <div className="border border-red-900 font-bold text-red-900 sm:text-sm rounded-lg  block w-full p-2.5">
-              <span className="text-xl">⚠</span>
-              {formState.errors.error} <span className="text-xl">⚠</span>
-            </div>
-          )}
+          <div className="text-sm font-medium text-gray-500">
+            Already a user?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Login
+            </Link>
+            {formState.errors?.error && (
+              <div className="border mt-3 border-red-900 font-bold text-red-900 sm:text-sm rounded-lg  block w-full p-2.5">
+                <span className="text-xl">⚠</span>
+                {formState.errors.error} <span className="text-xl">⚠</span>
+              </div>
+            )}
+          </div>
         </form>
       </div>
     </div>
