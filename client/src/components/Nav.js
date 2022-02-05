@@ -25,7 +25,7 @@ function Nav() {
       {loading ? (
         <Loading />
       ) : (
-        <nav className="bg-pergamino">
+        <nav className="bg-pergamino h-9v">
           <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center max-w-6xl w-full h-16">
               <div className="hidden md:flex grow items-baseline space-x-4">
