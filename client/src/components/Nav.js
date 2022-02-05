@@ -60,7 +60,8 @@ function Nav() {
               </div>
               <div className="flex items-center justify-items-end  md:flex">
                 <span className=" text-black px-2 py-2 text-lg font-medium lg:text-sm lg:px-5">
-                  Hello {data.me.name}!
+                  Hello {data.me.name}
+                  {data.me.plusOne && <span> and {data.me.namePlusOne}</span>}!
                 </span>
               </div>
               <div className="w-auto hidden md:flex">

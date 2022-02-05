@@ -85,12 +85,11 @@ const resolvers = {
       }
     },
 
-    attendingWedding: async (_, attending, context) => {
+    attendingWedding: async (_, { attending }, context) => {
       try {
-        console.log("hola");
         if (context.user) {
           const attendingWed = await User.findOneAndUpdate(
-            { _id: context.user.id },
+            { _id: context.user._id },
             { attending },
             { new: true }
           );
