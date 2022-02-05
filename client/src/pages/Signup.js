@@ -126,7 +126,7 @@ const Signup = () => {
           >
             Sign up!
           </button>
-          {formState.errors && (
+          {formState.errors?.error && (
             <div className="border border-red-900 font-bold text-red-900 sm:text-sm rounded-lg  block w-full p-2.5">
               <span className="text-xl">⚠</span>
               {formState.errors.error} <span className="text-xl">⚠</span>

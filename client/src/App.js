@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Rsvp from "./pages/Rsvp";
+import GuestDashBoard from "./pages/GuestDarshBoard";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -60,6 +61,15 @@ function App() {
               component={() => (
                 <Layout>
                   <Rsvp />
+                </Layout>
+              )}
+            />
+            <Route
+              exact
+              path="/guests"
+              component={() => (
+                <Layout>
+                  <GuestDashBoard />
                 </Layout>
               )}
             />

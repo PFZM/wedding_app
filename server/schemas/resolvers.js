@@ -50,17 +50,22 @@ const resolvers = {
 
     signUp: async (_, { email, password }) => {
       try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = await User.findOneAndUpdate(
-          { email },
-          { password: hashedPassword },
-          { new: true }
-        );
+        const user = await User.findOne({ email });
 
         if (!user) {
           throw new AuthenticationError("No user found with this email");
         }
+        if (user.password) {
+          throw new AuthenticationError("User already exist!");
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.updateOne(
+          { email: user.email },
+          { password: hashedPassword },
+          { new: true }
+        );
+
         const token = signToken(user);
         return { token, user };
       } catch (err) {

@@ -51,7 +51,7 @@ function Nav() {
                 </Link>
                 {data.me.admin && (
                   <Link
-                    to="/home"
+                    to="/guests"
                     className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Guests-Dashboard
@@ -153,7 +153,7 @@ function Nav() {
                     </Link>
                     {data.me.admin && (
                       <Link
-                        to="/home"
+                        to="/guests"
                         className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Guests-Dashboard
