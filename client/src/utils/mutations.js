@@ -24,6 +24,14 @@ export const SIGNUP_USER = gql`
   }
 `;
 
+export const SEND_FORGOT_EMAIL = gql`
+  mutation sendForgotEmail($email: String!) {
+    sendForgotEmail(email: $email) {
+      email
+    }
+  }
+`;
+
 export const ATTEND_WEDDING = gql`
   mutation attendingWedding($attending: Boolean!) {
     attendingWedding(attending: $attending) {

@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Message, Answer } = require("../models");
 const bcrypt = require("bcrypt");
 const { signToken } = require("../utils/auth");
+const sendEmailPassword = require("../utils/sendEmails");
 
 const resolvers = {
   Query: {
@@ -11,6 +12,7 @@ const resolvers = {
     user: async (_, { _id }) => {
       return User.findOne({ _id }).populate("messages");
     },
+
     me: async (_, __, context) => {
       try {
         if (context.user) {
@@ -68,6 +70,28 @@ const resolvers = {
 
         const token = signToken(user);
         return { token, user };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    sendForgotEmail: async (_, { email }) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("No user found with this email");
+        }
+
+        await sendEmailPassword(user);
+
+        await User.updateOne(
+          { email: user.email },
+          { password: null },
+          { new: true }
+        );
+
+        return { user };
       } catch (err) {
         console.error(err);
       }

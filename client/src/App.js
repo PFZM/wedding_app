@@ -13,6 +13,8 @@ import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Rsvp from "./pages/Rsvp";
 import GuestDashBoard from "./pages/GuestDarshBoard";
 
@@ -75,6 +77,12 @@ function App() {
             />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route
+              exact
+              path="/forgotpassword/user/:ID"
+              component={ResetPassword}
+            />
           </Switch>
         </>
       </Router>

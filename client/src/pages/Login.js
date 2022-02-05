@@ -86,12 +86,14 @@ const Login = () => {
               required
               onChange={handleChange}
             />
-            {/* <a
-              // href="#"
-              className="text-sm text-blue-700 hover:underline ml-auto dark:text-blue-500"
-            >
-              Lost Password?
-            </a> */}
+            <div className=" ml-auto mt-3 ">
+              <Link
+                to="/forgotpassword"
+                className="text-blue-500 hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
           <button
             type="submit"

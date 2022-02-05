@@ -64,6 +64,7 @@ const typeDefs = gql`
       plusOne: Boolean!
       namePlusOne: String
     ): User
+    sendForgotEmail(email: String!): User
     attendingWedding(attending: Boolean!): User
     addMessage(messaggeText: String!): Message
     editMessage(messageText: String): Message

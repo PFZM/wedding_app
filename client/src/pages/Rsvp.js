@@ -20,7 +20,7 @@ const Rsvp = () => {
         variables: { attending: true },
       });
       console.log(data);
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
