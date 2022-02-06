@@ -7,8 +7,13 @@ const sendEmailPassword = require("../utils/sendEmails");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate("messages");
+      try {
+        return User.find().sort({ admin: -1 }).populate("messages");
+      } catch (err) {
+        console.error(err);
+      }
     },
+
     user: async (_, { _id }) => {
       return User.findOne({ _id }).populate("messages");
     },

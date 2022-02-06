@@ -18,3 +18,22 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_USERS = gql`
+  query users {
+    users {
+      _id
+      name
+      lastname
+      email
+      phone
+      admin
+      attending
+      plusOne
+      namePlusOne
+      messages {
+        messageText
+      }
+    }
+  }
+`;
