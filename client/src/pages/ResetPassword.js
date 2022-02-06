@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { SIGNUP_USER } from "../utils/mutations";
+import { RESET_PASSWORD } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
@@ -10,7 +10,7 @@ const ResetPassword = () => {
     errors: { error: "" },
   });
 
-  const [signUpUser, { error }] = useMutation(SIGNUP_USER);
+  const [resetPassword, { error }] = useMutation(RESET_PASSWORD);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,7 +42,7 @@ const ResetPassword = () => {
         });
         return;
       }
-      const { data } = await signUpUser({
+      const { data } = await resetPassword({
         variables: {
           email: formState.values.email,
           password: formState.values.password,
@@ -59,7 +59,7 @@ const ResetPassword = () => {
         });
         return;
       }
-      Auth.login(data.signUp.token);
+      Auth.login(data.resetPassword.token);
     } catch (e) {
       console.error(e);
     }

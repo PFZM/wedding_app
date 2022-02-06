@@ -75,6 +75,29 @@ const resolvers = {
       }
     },
 
+    resetPassword: async (_, { email, password }) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("No user found with this email");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.updateOne(
+          { email: user.email },
+          { password: hashedPassword },
+          { new: true }
+        );
+
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
     sendForgotEmail: async (_, { email }) => {
       try {
         const user = await User.findOne({ email });
@@ -84,12 +107,6 @@ const resolvers = {
         }
 
         await sendEmailPassword(user);
-
-        await User.updateOne(
-          { email: user.email },
-          { password: null },
-          { new: true }
-        );
 
         return { user };
       } catch (err) {
