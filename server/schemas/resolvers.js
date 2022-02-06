@@ -1,6 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Message, Answer } = require("../models");
+const bcrypt = require("bcrypt");
 const { signToken } = require("../utils/auth");
+const sendEmailPassword = require("../utils/sendEmails");
 
 const resolvers = {
   Query: {
@@ -10,11 +12,16 @@ const resolvers = {
     user: async (_, { _id }) => {
       return User.findOne({ _id }).populate("messages");
     },
+
     me: async (_, __, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("messages");
+      try {
+        if (context.user) {
+          return User.findOne({ _id: context.user._id }).populate("messages");
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      } catch (err) {
+        console.error(err);
       }
-      throw new AuthenticationError("You need to be logged in!");
     },
     messages: async () => {
       return Message.find().sort({ createdAt: -1 });
@@ -45,13 +52,63 @@ const resolvers = {
 
     signUp: async (_, { email, password }) => {
       try {
-        const signUpUser = await User.findOneAndUpdate(
-          { email: email },
-          { $addToSet: { password: { password } } },
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("No user found with this email");
+        }
+        if (user.password) {
+          throw new AuthenticationError("User already exist!");
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.updateOne(
+          { email: user.email },
+          { password: hashedPassword },
           { new: true }
         );
-        const token = signToken(signUpUser);
-        return { token, signUpUser };
+
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    resetPassword: async (_, { email, password }) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("No user found with this email");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.updateOne(
+          { email: user.email },
+          { password: hashedPassword },
+          { new: true }
+        );
+
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    sendForgotEmail: async (_, { email }) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("No user found with this email");
+        }
+
+        await sendEmailPassword(user);
+
+        return { user };
       } catch (err) {
         console.error(err);
       }
@@ -69,12 +126,12 @@ const resolvers = {
       }
     },
 
-    attendingWedding: async (_, { rsvp }, context) => {
+    attendingWedding: async (_, { attending }, context) => {
       try {
         if (context.user) {
           const attendingWed = await User.findOneAndUpdate(
-            { _id: context.user.id },
-            { $addToSet: { attending: rsvp } },
+            { _id: context.user._id },
+            { attending },
             { new: true }
           );
           return attendingWed;

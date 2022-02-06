@@ -15,17 +15,17 @@
     "email": "guest1@test.com",
     "phone": "615456789",
     "admin": false,
-    "attending": true,
+    "attending": null,
     "plusOne": true,
     "namePlusOne": "guest1+1"
   },
   {
     "name": "Test2",
     "lastname": "Guest2",
-    "email": "guest2@test.com",
+    "email": "pfzm@hotmail.com",
     "phone": "615456789",
     "admin": false,
-    "attending": true,
+    "attending": null,
     "plusOne": false
   }
 ]

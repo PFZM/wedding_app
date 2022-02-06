@@ -44,6 +44,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     signUp(email: String!, password: String!): Auth
+    resetPassword(email: String!, password: String!): Auth
     addUser(
       name: String!
       lastname: String!
@@ -64,6 +65,7 @@ const typeDefs = gql`
       plusOne: Boolean!
       namePlusOne: String
     ): User
+    sendForgotEmail(email: String!): User
     attendingWedding(attending: Boolean!): User
     addMessage(messaggeText: String!): Message
     editMessage(messageText: String): Message
