@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import Loading from "../components/Loading";
 import YesAttending from "../components/YesAttending";
+import NoAttending from "../components/NoAttending";
 
 const Rsvp = () => {
   const [attendingWedding, { error }] = useMutation(ATTEND_WEDDING);
@@ -47,9 +48,7 @@ const Rsvp = () => {
         <main className="bg-cover bg-home-bkg h-59v md:h-63v">
           <div className="max-w-7xl mx-auto p-6 sm:px-6 lg:px-8">
             <div className="px-4 py-6 sm:px-0 bg-slate-300  bg-opacity-90 border-4  border-gray-200 rounded-lg">
-              {data.me.attending ? (
-                <YesAttending />
-              ) : (
+              {data.me.attending === null ? (
                 <div className="flex flex-col px-4 sm:px-6 lg:px-8">
                   <div className="mb-5 underline underline-offset-8 decoration-2  text-5xl text-center font-header-font text-gray-900">
                     Let us know if you can make it
@@ -81,6 +80,10 @@ const Rsvp = () => {
                     </button>
                   </div>
                 </div>
+              ) : data.me.attending === true ? (
+                <YesAttending />
+              ) : (
+                <NoAttending />
               )}
             </div>
           </div>

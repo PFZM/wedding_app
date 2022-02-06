@@ -51,7 +51,6 @@ const typeDefs = gql`
       email: String!
       phone: String!
       admin: Boolean!
-      attending: Boolean
       plusOne: Boolean!
       namePlusOne: String
     ): User

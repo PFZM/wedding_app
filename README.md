@@ -1,75 +1,134 @@
-23 Final Project: MERN Stack Single-Page Application
+# README - WEDDING APP
 
-Projects have played a key role in your journey to becoming a full-stack web developer. As you apply for development jobs, your portfolio is absolutely vital to opening doors to opportunities. Your portfolio showcases high-quality deployed examples of your work, and you can use your finished projects for that very purpose.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This project is a fantastic opportunity to show employers your collaborative skills and coding abilities, especially in the context of a scalable, user-focused MERN app. Remember that employers want to see what you can do, but they also want to see how you work with other developers. The more examples of deployed collaborative work you have in your portfolio, the more likely you are to get an interview and a job.
+## Link to see the deployed application:
 
-## Project Requirements
+## Description
 
-Your group will use everything you’ve learned throughout this course to create a MERN stack single-page application that works with real-world data to solve a real-world challenge, with a focus on data and user demand. This project will provide you with the best opportunity to demonstrate your problem-solving skills, which employers will want to see during interviews. Once again, the user story and acceptance criteria will depend on the project that you create, but your project must fulfill the following requirements:
+This is a responsive MERN (MongoDb, Express, React and Node.Js) application, this application allows people planing their weddings to share all the information about the wedding to their guests, it has a functionality for the guest to RSVP and send messages to the administrators. As an administrator user you can add guests, see who will be attending at the wedding and who doesn't and reply to the messages.
 
-- Use React for the front end.
+Application is responsive to various screen size:
 
-- Use GraphQL with a Node.js and Express.js server.
+Mobile:
 
-- Use MongoDB or SQL with an ORM for the database.
+![mobilesize](./assets/images/mobile.png)
 
-- Use queries and mutations for retrieving, adding, updating, and deleting data.
+Desktop:
 
-- Be deployed using Heroku (with data).
+![home_page](./assets/images/home_page.png)
 
-- Have a polished UI.
+Packages/libraries used for this application:
+[Apollo Client](https://www.apollographql.com/docs/react/)  
+[Apollo-server-express](https://www.npmjs.com/package/apollo-server-express)  
+[Bcrypt](https://www.npmjs.com/package/bcrypt)  
+[date-fns](https://date-fns.org/)  
+[dotenv](https://www.npmjs.com/package/dotenv)  
+[Express](https://www.npmjs.com/package/express)  
+[Express-session](https://www.npmjs.com/package/express-session)  
+[GraphQL](https://graphql.org/)  
+[jwt-decode](https://www.npmjs.com/package/jwt-decode)  
+[Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)  
+[Moongose](https://mongoosejs.com/)  
+[Nodemailer](https://nodemailer.com/about/)  
+[React](https://reactjs.org/)  
+[React-contdown](https://www.npmjs.com/package/react-countdown)  
+[React-dom](https://www.npmjs.com/package/react-dom)
+[React-icons](https://react-icons.github.io/react-icons/)  
+[React-router-dom](https://reactrouter.com/web/guides/quick-start)  
+[tailwindcss](https://tailwindcss.com/)
 
-- Be responsive.
+## Table of contents:
 
-- Be interactive (i.e., accept and respond to user input).
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [License](#license)
+4. [Contributing](#contributing)
+5. [Collaborators & Questions](#Collaborators/Questions)
 
-- Include authentication (JWT).
+## Installation
 
-- Protect sensitive API key information on the server.
+1. Fork repository
+2. Clone repository to local environment.
+3. Node.js must be installed.
+4. To install all the dependencies use the following command in the root folder:
 
-- Have a clean repository that meets quality coding standards (file structure, naming conventions, best practices for class and id naming conventions, indentation, high-quality comments, etc.).
+```bash
+npm install
+```
 
-- Have a high-quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
+5. You will need to create a .env file with the following variables:
 
-### CSS Styling
+```bash
+SECRET=
+//For the set up of Nodemailer (depending on your domain you will need to do take additional sterps, below is for Gmail configuration)
+REACT_APP_EMAIL=
+REACT_APP_EMAIL-PASS=
+OAUTH_CLIENTID=
+OAUTH_CLIENT_SECRET=
+OAUTH_REFRESH_TOKEN=
+```
 
-Instead of using a CSS library like Bootstrap, consider one of the following suggestions:
+6. Seed the database (you must create an admin user):
 
-- Look into the concept of CSS-in-JS, which abstracts CSS to the component level, using JavaScript to describe styles in a declarative and maintainable way. Some popular libraries include [styled-components](https://styled-components.com/) and [Emotion](https://emotion.sh/docs/introduction).
+```bash
+npm run seed
+```
 
-- Try using a component library, such as [Semantic UI](https://semantic-ui.com/), [Chakra UI](https://chakra-ui.com/), or [Ant Design](https://ant.design/).
+7. To run the application in development:
 
-- Create all the CSS for your application just using CSS.
+```bash
+npm run develop
+```
 
-Ultimately, it doesn't matter which of these options you choose&mdash;it just needs to look professional and be mobile-friendly.
+## Usage
 
-### Payment Platform
+User will land on the landing page:
 
-Consider integrating the Stripe payment platform. Even if you don’t create an e-commerce application, you could set up your site to accept charitable donations.
+![landingpage](./assets/images/Landing_page.png)
 
-### Bonus
+If it is a new user by clicking on 'Sign Up' it will be redirected to the Sign Up page to register:
 
-Although this is not a requirement for your project, see if you can also implement functionality to meet the minimum requirements of a PWA:
+![signuppage](./assets/images/Sign_up_page.png)
 
-- Uses a web manifest
+If the user has an account already by clicking on the 'Login to your account' it will be redirected to the Login page:
 
-- Uses a service worker for offline functionality
+![loginpage](./assets/images/Login_page.png)
 
-- Is installable
+If the user forgot the his password by clicking the forgot password a link will be sent to the registered email address with a link to reset the password.
 
-## Presentation Requirements
+Once the user Login it will be redirected to the home page, where the the information of the wedding will be displayed (save the date, invitation, all the details). In the nav bar if the user is as administrator the option 'Guest-Dashboard' will be displayed:
 
-Use this [project presentation template](https://docs.google.com/presentation/d/10QaO9KH8HtUXj__81ve0SZcpO5DbMbqqQr4iPpbwKks/edit?usp=sharing) to address the following:
+![home_page](./assets/images/home_page.png)
 
-- Elevator pitch: a one minute description of your application
+The RSVP tab as a default will give the option to the user to mark yes or no:
 
-- Concept: What is your user story? What was your motivation for development?
+![RSVP](./assets/images/rsvp_page.png)
 
-- Process: What were the technologies used? How were tasks and roles broken down and assigned? What challenges did you encounter? What were your successes?
+If the user marked yes RSVP tab will change to show his response, same as if it marked no:
 
-- Demo: Show your stuff!
+![RSVP-yes](./assets/images/rsvp_yes.png)
 
-- Directions for Future Development
+![RSVP-no](./assets/images/rsvp_no.png)
 
-- Links to the deployed application and the GitHub repository. Use the [Guide to Deploy with Heroku and MongoDB Atlas](https://coding-boot-camp.github.io/full-stack/mongodb/deploy-with-heroku-and-mongodb-atlas) on The Full-Stack Blog if you need a reminder on how to deploy to Heroku.
+The guest dashboard shows the guest list, if they are admin and if they are attending. The admin can add guests and view and edit the current guests:
+
+![guestdashboard](./assets/images/guest_dashboard_page.png)
+
+\*\*Messages tab is under development
+
+## License
+
+This project is covered under the MIT license.
+
+## Contributing
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+Please note we have a code of conduct, please follow it in all your interactions with the project.
+Contributions follow the [Contributor Convenant](http://contributor-covenant.org/version/1/4/).
+
+## Questions
+
+[GitHub profile](http://github.com/PFZM)
+
+[Contact Me - Email](mailto:pfzm@hotmail.com)

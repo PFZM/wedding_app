@@ -123,7 +123,7 @@ const resolvers = {
       try {
         if (context.user.admin) {
           const user = await User.create(userDetails);
-          return { user };
+          return user;
         }
         throw new AuthenticationError("You are not auth to add users");
       } catch (err) {
