@@ -52,3 +52,33 @@ export const ATTEND_WEDDING = gql`
     }
   }
 `;
+
+export const ADD_USER = gql`
+  mutation addUser(
+    $name: String!
+    $lastname: String!
+    $email: String!
+    $phone: String!
+    $admin: Boolean!
+    $plusOne: Boolean!
+    $namePlusOne: String
+  ) {
+    addUser(
+      name: $name
+      lastname: $lastname
+      email: $email
+      phone: $phone
+      admin: $admin
+      plusOne: $plusOne
+      namePlusOne: $namePlusOne
+    ) {
+      name
+      lastname
+      email
+      phone
+      admin
+      plusOne
+      namePlusOne
+    }
+  }
+`;

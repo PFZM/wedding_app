@@ -1,16 +1,16 @@
 [
   {
-    "name": "Test Admin1",
+    "name": "Admin1",
     "lastname": "Admin1",
     "email": "admin1@test.com",
     "password": "password01",
     "phone": "614000555",
     "admin": "true",
-    "attending": true,
+    "attending": null,
     "plusOne": false
   },
   {
-    "name": "Test1",
+    "name": "Guest 1",
     "lastname": "Guest1",
     "email": "guest1@test.com",
     "phone": "615456789",
@@ -20,12 +20,12 @@
     "namePlusOne": "guest1+1"
   },
   {
-    "name": "Test2",
+    "name": "Guest 2",
     "lastname": "Guest2",
-    "email": "pfzm@hotmail.com",
+    "email": "test2@test.com",
     "phone": "615456789",
     "admin": false,
-    "attending": null,
+    "attending": false,
     "plusOne": false
   }
 ]
