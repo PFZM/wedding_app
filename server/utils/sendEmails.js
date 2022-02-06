@@ -3,7 +3,6 @@ require("dotenv").config();
 
 async function sendEmailPassword(user, res) {
   try {
-    console.log(user);
     let info = await transporter.sendMail({
       from: `"Lana & Pablo" <${process.env.REACT_APP_EMAIL}>`,
       to: `${user.email}`,
@@ -13,8 +12,7 @@ async function sendEmailPassword(user, res) {
             <p>Hello ${user.name},</p>
             <p>There was a request to change your password!.\n
             If you did not make this request please ignore this email.
-            Otherwise, please click this link to change your password <a href= http://localhost:3000/forgotpassword/user/${user._id}>
-            </p>
+            Otherwise, please click this <a href= http://localhost:3000/forgotpassword/user/${user._id}> link </a> to change your password</p>
             </body>`,
     });
 

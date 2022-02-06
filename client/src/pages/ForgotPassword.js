@@ -32,7 +32,12 @@ const ForgotPassword = () => {
         });
         return;
       }
-      //   window.location.assign("/");
+      setFormState({
+        values: { email: "" },
+        errors: {
+          error: "An email has been sent with a link to reset your password",
+        },
+      });
     } catch (e) {
       console.error(e);
     }
