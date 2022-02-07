@@ -10,30 +10,52 @@ const ViewAndEditGuest = () => {
   console.log(params.ID);
 
   const { loading, data } = useQuery(QUERY_USER, {
-    variables: { params },
+    variables: {
+      id: params.ID,
+    },
   });
 
   console.log(data);
 
   const [formState, setFormState] = useState({
     values: {
-      name: "",
-      lastname: "",
-      email: "",
-      phone: "",
-      admin: false,
-      plusOne: false,
-      namePluseOne: "",
+      name: null,
+      lastname: null,
+      email: null,
+      phone: null,
+      admin: null,
+      plusOne: null,
+      namePluseOne: null,
     },
     errors: { error: "" },
   });
+  if (!loading && formState.values.name === null) {
+    setFormState({
+      ...formState,
+      values: {
+        name: data.user.name,
+        lastname: data.user.lastname,
+        email: data.user.email,
+        phone: data.user.phone,
+        admin: data.user.admin,
+        plusOne: data.user.plusOne,
+        namePluseOne: data.user.namePlusOne,
+      },
+    });
+  }
 
   let history = useHistory();
 
   const [editUser, { error }] = useMutation(EDIT_USER);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let value, name;
+    const inputEl = event.target;
+    if (inputEl.type === "checkbox") {
+      [name, value] = [inputEl.name, inputEl.checked];
+    } else {
+      [name, value] = [inputEl.name, inputEl.value];
+    }
 
     setFormState({
       values: { ...formState.values, [name]: value },
@@ -45,16 +67,17 @@ const ViewAndEditGuest = () => {
     console.log("hola", formState.values.admin);
     try {
       const { data } = await editUser({
-        variables: { ...formState.values },
+        variables: { ...formState.values, id: params.ID },
       });
-      if (data.addUser === null) {
+      if (data.editUser === null) {
         setFormState({
           errors: {
             error: "Please check you input all the required information",
           },
         });
-        history.goBack();
+        return;
       }
+      history.goBack();
     } catch (e) {
       console.error(e);
     }
@@ -149,7 +172,7 @@ const ViewAndEditGuest = () => {
                 <input
                   type="checkbox"
                   name="admin"
-                  value={formState?.values?.admin}
+                  checked={formState?.values?.admin}
                   className="cursor-pointer shadow-sm"
                   onChange={handleChange}
                 />
@@ -164,7 +187,7 @@ const ViewAndEditGuest = () => {
                 <input
                   type="checkbox"
                   name="plusOne"
-                  value={formState?.values?.plusOne}
+                  checked={formState?.values?.plusOne}
                   className="form-check-label text-sm font-medium text-gray-700 block mb-2"
                   onChange={handleChange}
                 />

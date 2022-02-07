@@ -39,8 +39,8 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user {
-    user {
+  query user($id: ID!) {
+    user(_id: $id) {
       _id
       name
       lastname

@@ -15,6 +15,7 @@ const resolvers = {
     },
 
     user: async (_, { _id }) => {
+      console.log("id is", _id);
       return User.findOne({ _id }).populate("messages");
     },
 
@@ -148,14 +149,18 @@ const resolvers = {
     },
 
     editUser: async (_, { _id, ...userDetails }, context) => {
+      console.log(userDetails);
+
       try {
         if (context.user.admin) {
-          const user = await User.findOneAndUpade(
+          console.log("this is a msyterryr");
+          const user = await User.findOneAndUpdate(
             { _id: _id },
             { ...userDetails },
             { new: true }
           );
-          return { user };
+          console.log(user);
+          return user;
         }
         throw new AuthenticationError("You are not auth to edit users");
       } catch (err) {

@@ -85,6 +85,7 @@ export const ADD_USER = gql`
 
 export const EDIT_USER = gql`
   mutation editUser(
+    $id: ID!
     $name: String!
     $lastname: String!
     $email: String!
@@ -95,6 +96,7 @@ export const EDIT_USER = gql`
     $namePlusOne: String
   ) {
     editUser(
+      _id: $id
       name: $name
       lastname: $lastname
       email: $email

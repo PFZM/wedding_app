@@ -22,7 +22,13 @@ const AddGuest = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let value, name;
+    const inputEl = event.target;
+    if (inputEl.type === "checkbox") {
+      [name, value] = [inputEl.name, inputEl.checked];
+    } else {
+      [name, value] = [inputEl.name, inputEl.value];
+    }
 
     setFormState({
       values: { ...formState.values, [name]: value },
@@ -42,8 +48,9 @@ const AddGuest = () => {
             error: "Please check you input all the required information",
           },
         });
-        history.goBack();
+        return;
       }
+      history.goBack();
     } catch (e) {
       console.error(e);
     }
