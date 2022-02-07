@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_USERS } from "../utils/queries";
 import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
 const GuestDashBoard = () => {
   const { loading, data } = useQuery(QUERY_USERS);
@@ -55,12 +56,25 @@ const GuestDashBoard = () => {
                             )}
                           </td>
                           <td>
-                            <button
+                            {/* <button
                               className="bg-gray-700 text-white hover:bg-emerald-800 hover:text-white px-3 py-2 mt-2 rounded-md text-sm font-medium"
-                              // onClick={attendingNo}
+                              onClick={() =>
+                                window.location.assign(
+                                  `/guests/admin/view&editguest/${user._id}`
+                                )
+                              }
                             >
                               Click!
-                            </button>
+                            </button> */}
+                            <Link
+                              to={{
+                                pathname: `/guests/admin/view&editguest/${user._id}`,
+                              }}
+                            >
+                              <button className="bg-gray-700 text-white hover:bg-emerald-800 hover:text-white px-3 py-2 mt-2 rounded-md text-sm font-medium">
+                                Click!
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       ))}

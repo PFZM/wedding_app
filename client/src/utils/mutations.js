@@ -82,3 +82,38 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const EDIT_USER = gql`
+  mutation editUser(
+    $id: ID!
+    $name: String!
+    $lastname: String!
+    $email: String!
+    $phone: String!
+    $admin: Boolean!
+    $attending: Boolean
+    $plusOne: Boolean!
+    $namePlusOne: String
+  ) {
+    editUser(
+      _id: $id
+      name: $name
+      lastname: $lastname
+      email: $email
+      phone: $phone
+      admin: $admin
+      attending: $attending
+      plusOne: $plusOne
+      namePlusOne: $namePlusOne
+    ) {
+      name
+      lastname
+      email
+      phone
+      admin
+      attending
+      plusOne
+      namePlusOne
+    }
+  }
+`;

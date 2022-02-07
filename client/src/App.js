@@ -18,6 +18,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Rsvp from "./pages/Rsvp";
 import GuestDashBoard from "./pages/GuestDarshBoard";
 import AddGuest from "./pages/AddGuest";
+import ViewAndEditGuest from "./pages/ViewAndEditGuest";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -80,6 +81,11 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/forgotpassword" component={ForgotPassword} />
             <Route exact path="/guests/admin/addguest" component={AddGuest} />
+            <Route
+              exact
+              path="/guests/admin/view&editguest/:ID"
+              component={ViewAndEditGuest}
+            />
             <Route
               exact
               path="/forgotpassword/user/:ID"

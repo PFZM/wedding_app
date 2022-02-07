@@ -36,7 +36,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(_id: ID): User
+    user(_id: ID!): User
     me: User
     messages: [Message]
   }
@@ -55,6 +55,7 @@ const typeDefs = gql`
       namePlusOne: String
     ): User
     editUser(
+      _id: ID!
       name: String!
       lastname: String!
       email: String!
