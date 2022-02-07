@@ -7,12 +7,12 @@ async function sendEmailPassword(user, res) {
       from: `"Lana & Pablo" <${process.env.REACT_APP_EMAIL}>`,
       to: `${user.email}`,
       subject: "Lana and Pablo wedding - Reset Password",
-      text: `Please click this link to change your password <a href= http://localhost:3000/forgotpassword/user/${user._id}>`,
+      text: `Please click this link to change your password <a href= https://lana-pablo-wedding.herokuapp.com/forgotpassword/user/${user._id}>`,
       html: `<body>
             <p>Hello ${user.name},</p>
             <p>There was a request to change your password!.\n
             If you did not make this request please ignore this email.
-            Otherwise, please click this <a href= http://localhost:3000/forgotpassword/user/${user._id}> link </a> to change your password</p>
+            Otherwise, please click this <a href= https://lana-pablo-wedding.herokuapp.com/forgotpassword/user/${user._id}> link </a> to change your password</p>
             </body>`,
     });
 
