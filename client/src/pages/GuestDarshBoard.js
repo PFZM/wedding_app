@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const GuestDashBoard = () => {
   const { loading, data } = useQuery(QUERY_USERS);
-  console.log(data);
 
   const addGuest = (event) => {
     event.preventDefault();
@@ -18,7 +17,7 @@ const GuestDashBoard = () => {
       {loading ? (
         <Loading />
       ) : (
-        <main className="min-h- bg-cover bg-home-bkg h-59v md:h-63v">
+        <main className="min-h- bg-cover bg-home-bkg h-full">
           <div className="max-w-7xl mx-auto p-6 sm:px-6 lg:px-8">
             <div className="px-4 py-6 sm:px-0 bg-slate-300  bg-opacity-90 border-4  border-gray-200 rounded-lg">
               <div className="flex flex-col px-4 sm:px-6 lg:px-8">
@@ -56,16 +55,6 @@ const GuestDashBoard = () => {
                             )}
                           </td>
                           <td>
-                            {/* <button
-                              className="bg-gray-700 text-white hover:bg-emerald-800 hover:text-white px-3 py-2 mt-2 rounded-md text-sm font-medium"
-                              onClick={() =>
-                                window.location.assign(
-                                  `/guests/admin/view&editguest/${user._id}`
-                                )
-                              }
-                            >
-                              Click!
-                            </button> */}
                             <Link
                               to={{
                                 pathname: `/guests/admin/view&editguest/${user._id}`,

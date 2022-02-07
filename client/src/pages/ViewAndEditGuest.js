@@ -7,15 +7,12 @@ import Loading from "../components/Loading";
 
 const ViewAndEditGuest = () => {
   const params = useParams();
-  console.log(params.ID);
 
   const { loading, data } = useQuery(QUERY_USER, {
     variables: {
       id: params.ID,
     },
   });
-
-  console.log(data);
 
   const [formState, setFormState] = useState({
     values: {
@@ -64,7 +61,6 @@ const ViewAndEditGuest = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("hola", formState.values.admin);
     try {
       const { data } = await editUser({
         variables: { ...formState.values, id: params.ID },
@@ -88,7 +84,7 @@ const ViewAndEditGuest = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="bg-cover bg-login-signup-bkg max-w-none mx-auto  flex h-auto justify-center items-center">
+        <div className="bg-cover bg-login-signup-bkg max-w-none flex h-auto justify-center items-center">
           <div className="bg-pearl-white shadow border border-gray-200 min-w-[40%] rounded-lg max-w-sm p-4 sm:p-6 lg:p-8">
             <form className="space-y-6" onSubmit={handleFormSubmit}>
               <h3 className="text-xl font-medium text-gray-900">

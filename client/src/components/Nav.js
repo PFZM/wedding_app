@@ -12,7 +12,6 @@ function Nav() {
   }
 
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(data);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +24,7 @@ function Nav() {
       {loading ? (
         <Loading />
       ) : (
-        <nav className="bg-pergamino h-9v">
+        <nav className="bg-pergamino">
           <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center max-w-6xl w-full h-16">
               <div className="hidden md:flex grow items-baseline space-x-4">
@@ -44,7 +43,7 @@ function Nav() {
                 </Link>
 
                 <Link
-                  to="/home"
+                  to="/comingsoon"
                   className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Messages

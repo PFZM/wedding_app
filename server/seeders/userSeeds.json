@@ -8,24 +8,5 @@
     "admin": "true",
     "attending": null,
     "plusOne": false
-  },
-  {
-    "name": "Guest 1",
-    "lastname": "Guest1",
-    "email": "guest1@test.com",
-    "phone": "615456789",
-    "admin": false,
-    "attending": null,
-    "plusOne": true,
-    "namePlusOne": "guest1+1"
-  },
-  {
-    "name": "Guest 2",
-    "lastname": "Guest2",
-    "email": "test2@test.com",
-    "phone": "615456789",
-    "admin": false,
-    "attending": false,
-    "plusOne": false
   }
 ]

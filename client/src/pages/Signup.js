@@ -49,7 +49,6 @@ const Signup = () => {
           password: formState.values.password,
         },
       });
-      console.log(data.signUp);
       if (data.signUp === null) {
         setFormState({
           values: { email: "", password: "", passwordConfirmation: "" },
@@ -72,7 +71,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-cover bg-login-signup-bkg max-w-none mx-auto  flex h-screen justify-center items-center">
+    <div className="bg-cover bg-login-signup-bkg max-w-none flex h-screen justify-center items-center">
       <div className="bg-pearl-white shadow border border-gray-200 rounded-lg max-w-sm p-4 sm:p-6 lg:p-8">
         <form className="space-y-6" onSubmit={handleFormSubmit}>
           <h3 className="text-xl font-medium text-gray-900">

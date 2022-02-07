@@ -18,7 +18,7 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-pergamino h-auto md:h-10v">
+    <footer className="bg-pergamino">
       <div className="max-w-7xl mx-auto px-4 pt-2 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-center lg:justify-between md:flex-row items-center h-auto md:h-16 md:justify-between">
           <div className=" text-2xl font-header-font text-gray-900">

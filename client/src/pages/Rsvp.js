@@ -11,7 +11,6 @@ const Rsvp = () => {
   const [attendingWedding, { error }] = useMutation(ATTEND_WEDDING);
 
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(data);
 
   const attendingYes = async (event) => {
     event.preventDefault();
@@ -20,7 +19,6 @@ const Rsvp = () => {
       const { data } = await attendingWedding({
         variables: { attending: true },
       });
-      console.log(data);
       window.location.reload();
     } catch (err) {
       console.error(err);
@@ -45,7 +43,7 @@ const Rsvp = () => {
       {loading ? (
         <Loading />
       ) : (
-        <main className="bg-cover bg-home-bkg h-59v md:h-63v">
+        <main className="bg-cover bg-home-bkg h-full">
           <div className="max-w-7xl mx-auto p-6 sm:px-6 lg:px-8">
             <div className="px-4 py-6 sm:px-0 bg-slate-300  bg-opacity-90 border-4  border-gray-200 rounded-lg">
               {data.me.attending === null ? (
