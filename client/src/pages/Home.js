@@ -3,7 +3,7 @@ import pabloLanaPic from "../assets/images/pablo_lana.jpg";
 
 const Home = () => {
   return (
-    <main className="bg-cover bg-home-bkg h-59v md:h-63v">
+    <main className="bg-cover bg-home-bkg h-full">
       <div className="max-w-7xl mx-auto p-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0 bg-slate-300  bg-opacity-90 border-4  border-gray-200 rounded-lg">
           <div className="flex flex-col px-4 sm:px-6 lg:px-8">

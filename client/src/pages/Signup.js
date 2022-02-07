@@ -49,7 +49,6 @@ const Signup = () => {
           password: formState.values.password,
         },
       });
-      console.log(data.signUp);
       if (data.signUp === null) {
         setFormState({
           values: { email: "", password: "", passwordConfirmation: "" },

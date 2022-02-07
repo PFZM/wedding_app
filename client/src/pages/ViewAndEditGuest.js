@@ -7,15 +7,12 @@ import Loading from "../components/Loading";
 
 const ViewAndEditGuest = () => {
   const params = useParams();
-  console.log(params.ID);
 
   const { loading, data } = useQuery(QUERY_USER, {
     variables: {
       id: params.ID,
     },
   });
-
-  console.log(data);
 
   const [formState, setFormState] = useState({
     values: {
@@ -64,7 +61,6 @@ const ViewAndEditGuest = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("hola", formState.values.admin);
     try {
       const { data } = await editUser({
         variables: { ...formState.values, id: params.ID },

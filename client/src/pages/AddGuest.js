@@ -37,7 +37,6 @@ const AddGuest = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("hola", formState.values.admin);
     try {
       const { data } = await addUser({
         variables: { ...formState.values },

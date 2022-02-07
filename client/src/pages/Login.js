@@ -27,7 +27,6 @@ const Login = () => {
       const { data } = await login({
         variables: { ...formState.values },
       });
-      console.log(data.login);
       if (data.login === null) {
         setFormState({
           values: { email: "", password: "" },
