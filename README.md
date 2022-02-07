@@ -4,6 +4,8 @@
 
 ## Link to see the deployed application:
 
+[DEPLOYED APPLICATION](https://lana-pablo-wedding.herokuapp.com/)
+
 ## Description
 
 This is a responsive MERN (MongoDb, Express, React and Node.Js) application, this application allows people planing their weddings to share all the information about the wedding to their guests, it has a functionality for the guest to RSVP and send messages to the administrators. As an administrator user you can add guests, see who will be attending at the wedding and who doesn't and reply to the messages.
