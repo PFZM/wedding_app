@@ -148,8 +148,6 @@ const resolvers = {
     },
 
     editUser: async (_, { _id, ...userDetails }, context) => {
-      console.log(userDetails);
-
       try {
         if (context.user.admin) {
           const user = await User.findOneAndUpdate(

@@ -34,7 +34,7 @@ Packages/libraries used for this application:
 [Moongose](https://mongoosejs.com/)  
 [Nodemailer](https://nodemailer.com/about/)  
 [React](https://reactjs.org/)  
-[React-contdown](https://www.npmjs.com/package/react-countdown)  
+[React-countdown](https://www.npmjs.com/package/react-countdown)  
 [React-dom](https://www.npmjs.com/package/react-dom)
 [React-icons](https://react-icons.github.io/react-icons/)  
 [React-router-dom](https://reactrouter.com/web/guides/quick-start)  
