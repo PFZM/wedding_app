@@ -1,6 +1,6 @@
 {
-  "short_name": "Wedding App",
-  "name": "Lana and Pablo Wedding App",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
