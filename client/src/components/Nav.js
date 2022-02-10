@@ -146,7 +146,7 @@ function Nav() {
                     </Link>
 
                     <Link
-                      to="/home"
+                      to="/comingsoon"
                       className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       Messages
